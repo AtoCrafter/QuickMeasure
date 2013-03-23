@@ -24,6 +24,11 @@ public class GuiMeasure extends Gui {
      * @see net.minecraft.client.gui.GuiIngame#renderGameOverlay(float, boolean, int, int)
      */
     public void renderGameOverlay() {
+        // Gui を開いていたり、タイトル画面だったりした場合は表示しない
+        if (mc.currentScreen != null) {
+            return;
+        }
+
         Measure measure = manager.getActiveMeasure();
         if (measure != null) {
             String text = measure.getText();
