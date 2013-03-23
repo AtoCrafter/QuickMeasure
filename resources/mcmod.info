@@ -1,0 +1,16 @@
+[
+{
+  "modid": "QuickMeasure",
+  "name": "Quick Measure",
+  "description": "This MOD provides quick access to measure count of blocks.",
+  "version": "@VERSION@",
+  "mcversion": "@MCVERSION@",
+  "url": "http://atocrafter.github.com/QuickMeasure/",
+  "authors": [
+    "Ato"
+  ],
+  "dependencies": [
+    "mod_MinecraftForge"
+  ]
+}
+]
