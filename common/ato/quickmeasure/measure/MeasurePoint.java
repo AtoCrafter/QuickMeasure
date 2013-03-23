@@ -2,6 +2,7 @@ package ato.quickmeasure.measure;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 
 /**
  * 座標の計測
@@ -20,7 +21,8 @@ public class MeasurePoint extends Measure {
             int dx = mo.blockX - ox;
             int dy = mo.blockY - oy;
             int dz = mo.blockZ - oz;
-            return "(" + dx + "," + dy + "," + dz + ")";
+            return "(" + dx + "," + dy + "," + dz + ")"
+                    + String.format(" %.2f", Vec3.createVectorHelper(dx, dy, dz).distanceTo(Vec3.createVectorHelper(0, 0, 0)));
         } else {
             return null;
         }
