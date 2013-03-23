@@ -9,4 +9,12 @@ public class MeasurePoint extends Measure {
     public String getText() {
         return "test";
     }
+
+    @Override
+    public void start() {
+    }
+
+    @Override
+    public void stop() {
+    }
 }
