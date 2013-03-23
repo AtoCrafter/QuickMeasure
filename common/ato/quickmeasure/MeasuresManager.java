@@ -27,6 +27,14 @@ public class MeasuresManager {
      * @param measure 非アクティブにする場合は null
      */
     public void setActiveMeasure(Measure measure) {
-        this.measure = measure;
+        if (this.measure != measure) {
+            if (this.measure != null) {
+                this.measure.stop();
+            }
+            this.measure = measure;
+            if (this.measure != null) {
+                this.measure.start();
+            }
+        }
     }
 }
