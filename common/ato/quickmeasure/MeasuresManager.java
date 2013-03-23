@@ -37,4 +37,17 @@ public class MeasuresManager {
             }
         }
     }
+
+    /**
+     * アクティブなメジャーの実行、待機を切り替える
+     */
+    public void toggleRunning() {
+        if (measure != null) {
+            if (measure.isRunning()) {
+                measure.stop();
+            } else {
+                measure.start();
+            }
+        }
+    }
 }

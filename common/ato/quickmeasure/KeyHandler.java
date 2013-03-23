@@ -1,6 +1,5 @@
 package ato.quickmeasure;
 
-import ato.quickmeasure.measure.MeasurePoint;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.TickType;
 import net.minecraft.client.settings.KeyBinding;
@@ -21,11 +20,7 @@ public class KeyHandler extends KeyBindingRegistry.KeyHandler {
     @Override
     public void keyDown(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd, boolean isRepeat) {
         if (kb == key && !tickEnd) {
-            if (manager.getActiveMeasure() == null) {
-                manager.setActiveMeasure(new MeasurePoint());
-            } else {
-                manager.setActiveMeasure(null);
-            }
+            manager.toggleRunning();
         }
     }
 

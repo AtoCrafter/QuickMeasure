@@ -30,4 +30,8 @@ public abstract class Measure {
     public void stop() {
         running = false;
     }
+
+    public boolean isRunning() {
+        return running;
+    }
 }
