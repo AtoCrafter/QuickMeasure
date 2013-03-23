@@ -32,7 +32,9 @@ public class MeasuresManager {
                 this.measure.stop();
             }
             this.measure = measure;
-            measure.start();
+            if (this.measure != null) {
+                this.measure.start();
+            }
         }
     }
 }
