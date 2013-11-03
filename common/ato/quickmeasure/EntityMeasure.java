@@ -79,10 +79,6 @@ public class EntityMeasure extends Entity {
     }
 
     @Override
-    public void setFire(int par1) {
-    }
-
-    @Override
     public boolean isBurning() {
         return false;
     }
@@ -92,7 +88,7 @@ public class EntityMeasure extends Entity {
     }
 
     @Override
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2) {
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float damage) {
         return false;
     }
 

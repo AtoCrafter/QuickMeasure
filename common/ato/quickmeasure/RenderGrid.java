@@ -6,6 +6,8 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 public class RenderGrid extends RenderPlayer {
@@ -21,17 +23,15 @@ public class RenderGrid extends RenderPlayer {
     }
 
     @Override
-    public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
-    }
-
-    /**
-     * Renders the entity's shadow and fire (if its on fire). Args: entity, x, y, z, yaw, partialTickTime
-     */
-    @Override
     public void doRenderShadowAndFire(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
     }
 
-    /**
+    @Override
+	protected ResourceLocation getEntityTexture(Entity par1Entity) {
+    	return null;
+	}
+
+	/**
      * グリッド線をレンダリングする
      */
     protected void renderGridLines(double x, double y, double z, int span, int times) {
