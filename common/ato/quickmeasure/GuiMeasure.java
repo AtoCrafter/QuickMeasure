@@ -1,6 +1,5 @@
 package ato.quickmeasure;
 
-import ato.quickmeasure.measure.Measure;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
@@ -29,15 +28,12 @@ public class GuiMeasure extends Gui {
             return;
         }
 
-        Measure measure = manager.getActiveMeasure();
-        if (measure != null) {
-            String text = measure.getText();
-            if (text != null) {
-                ScaledResolution scaledresolution = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
-                int centerX = scaledresolution.getScaledWidth() / 2;
-                int centerY = scaledresolution.getScaledHeight() / 2 + 10;
-                drawCenteredString(mc.fontRenderer, text, centerX, centerY, 0xFFFFFF);
-            }
+        String text = manager.getMeasureText();
+        if (text != null) {
+            ScaledResolution scaledresolution = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
+            int centerX = scaledresolution.getScaledWidth() / 2;
+            int centerY = scaledresolution.getScaledHeight() / 2 + 10;
+            drawCenteredString(mc.fontRenderer, text, centerX, centerY, 0xFFFFFF);
         }
     }
 }
