@@ -26,14 +26,14 @@ public class EntityMeasure extends Entity {
      */
     public final int startX, startY, startZ;
 
-    public EntityMeasure(World par1World, int span) {
+    public EntityMeasure(World par1World, int x, int y, int z, int span) {
         super(par1World);
 
+        this.startX = x;
+        this.startY = y;
+        this.startZ = z;
         this.span = span;
         resetPos();
-        this.startX = (int)this.posX;
-        this.startY = (int)this.posY;
-        this.startZ = (int)this.posZ;
     }
 
     @Override
