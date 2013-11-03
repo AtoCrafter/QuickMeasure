@@ -14,10 +14,11 @@ public class RenderGrid extends RenderPlayer {
     public void doRender(Entity e, double par2X, double par3Y, double par4Z, float f, float f1) {
         EntityMeasure em = (EntityMeasure) e;
         int radius = 10;
-        int x = (int) ((em.posX - radius) / em.span) * em.span;
-        int y = (int) ((em.posY - radius) / em.span) * em.span;
-        int z = (int) ((em.posZ - radius) / em.span) * em.span;
-        renderGridLines(x, y, z, em.span, radius * 2 / em.span);
+        int radiusTime = radius / em.span;
+        int x = (int) ((em.posX - em.startX) / em.span) * em.span + em.startX - radiusTime * em.span;
+        int y = (int) ((em.posY - em.startY) / em.span) * em.span + em.startY - radiusTime * em.span;
+        int z = (int) ((em.posZ - em.startZ) / em.span) * em.span + em.startZ - radiusTime * em.span;
+        renderGridLines(x, y, z, em.span, radiusTime * 2);
     }
 
     @Override
