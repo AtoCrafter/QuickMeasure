@@ -37,4 +37,33 @@ public class KeyHandler extends KeyBindingRegistry.KeyHandler {
     public String getLabel() {
         return "QuickMeasureSwitchKey";
     }
+
+    /**
+     * 現在押している数字キーを返す
+     */
+    public static int getDownNumber() {
+        if (Keyboard.isKeyDown(Keyboard.KEY_1)) {
+            return 1;
+        } else if (Keyboard.isKeyDown(Keyboard.KEY_2)) {
+            return 2;
+        } else if (Keyboard.isKeyDown(Keyboard.KEY_3)) {
+            return 3;
+        } else if (Keyboard.isKeyDown(Keyboard.KEY_4)) {
+            return 4;
+        } else if (Keyboard.isKeyDown(Keyboard.KEY_5)) {
+            return 5;
+        } else if (Keyboard.isKeyDown(Keyboard.KEY_6)) {
+            return 6;
+        } else if (Keyboard.isKeyDown(Keyboard.KEY_7)) {
+            return 7;
+        } else if (Keyboard.isKeyDown(Keyboard.KEY_8)) {
+            return 8;
+        } else if (Keyboard.isKeyDown(Keyboard.KEY_9)) {
+            return 9;
+        } else if (Keyboard.isKeyDown(Keyboard.KEY_0)) {
+            return 0;
+        } else {
+            return -1;
+        }
+    }
 }

@@ -17,8 +17,23 @@ import net.minecraft.world.World;
 @SideOnly(Side.CLIENT)
 public class EntityMeasure extends Entity {
 
-    public EntityMeasure(World par1World) {
+    /**
+     * グリッドの間隔
+     */
+    private final int span;
+    /**
+     * スタート位置
+     */
+    private final int startX, startY, startZ;
+
+    public EntityMeasure(World par1World, int span) {
         super(par1World);
+
+        this.span = span;
+        resetPos();
+        this.startX = (int)this.posX;
+        this.startY = (int)this.posY;
+        this.startZ = (int)this.posZ;
     }
 
     @Override
@@ -44,7 +59,9 @@ public class EntityMeasure extends Entity {
      */
     private void resetPos() {
         EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
-        super.setPosition(player.posX, player.posY + 0.5, player.posZ);
+        if (player != null) {
+            super.setPosition(player.posX, player.posY, player.posZ);
+        }
     }
 
     // 機能の無効化
