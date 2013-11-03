@@ -30,7 +30,7 @@ public class MeasureGrid extends Measure {
         if (num == 0) {
             num = 10;
         }
-        if (world != null && num > 0 && omo.typeOfHit == EnumMovingObjectType.TILE) {
+        if (world != null && num > 0 && omo != null && omo.typeOfHit == EnumMovingObjectType.TILE) {
             int x = omo.blockX, y = omo.blockY, z = omo.blockZ;
             switch (omo.sideHit) {
                 case 0: // Bottom
