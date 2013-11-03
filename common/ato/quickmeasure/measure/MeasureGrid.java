@@ -32,7 +32,6 @@ public class MeasureGrid extends Measure {
         }
         if (world != null && num > 0 && omo.typeOfHit == EnumMovingObjectType.TILE) {
             int x = omo.blockX, y = omo.blockY, z = omo.blockZ;
-            System.out.println(omo.sideHit);
             switch (omo.sideHit) {
                 case 0: // Bottom
                 case 2: // North
