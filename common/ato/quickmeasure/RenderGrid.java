@@ -13,7 +13,7 @@ public class RenderGrid extends RenderPlayer {
     @Override
     public void doRender(Entity e, double par2X, double par3Y, double par4Z, float f, float f1) {
         EntityMeasure em = (EntityMeasure) e;
-        int radius = 2;
+        int radius = 10;
         int x = (int) ((em.posX - radius) / em.span) * em.span;
         int y = (int) ((em.posY - radius) / em.span) * em.span;
         int z = (int) ((em.posZ - radius) / em.span) * em.span;
@@ -45,12 +45,8 @@ public class RenderGrid extends RenderPlayer {
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_LIGHTING);
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0f, 240.0f);
         RenderHelper.disableStandardItemLighting();
-        GL11.glDepthMask(false);
-        GL11.glDisable(GL11.GL_DEPTH_TEST);
 
         Tessellator ins = Tessellator.instance;
         int r = 255;
@@ -88,10 +84,7 @@ public class RenderGrid extends RenderPlayer {
         // 元の描画環境へ戻す
         GL11.glPopMatrix();
         RenderHelper.enableStandardItemLighting();
-        GL11.glDisable(GL11.GL_BLEND);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_LIGHTING);
-        GL11.glDepthMask(true);
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
     }
 }
