@@ -20,11 +20,11 @@ public class EntityMeasure extends Entity {
     /**
      * グリッドの間隔
      */
-    private final int span;
+    public final int span;
     /**
      * スタート位置
      */
-    private final int startX, startY, startZ;
+    public final int startX, startY, startZ;
 
     public EntityMeasure(World par1World, int span) {
         super(par1World);

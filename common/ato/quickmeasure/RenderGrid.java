@@ -12,8 +12,13 @@ import org.lwjgl.opengl.GL11;
 public class RenderGrid extends RenderPlayer {
 
     @Override
-    public void doRender(Entity e, double x, double y, double z, float f, float f1) {
-        renderGridLines(x, y, z);
+    public void doRender(Entity e, double par2X, double par3Y, double par4Z, float f, float f1) {
+        EntityMeasure em = (EntityMeasure)e;
+        int radius = 2;
+        int x = (int)((em.posX - radius) / em.span) * em.span;
+        int y = (int)((em.posY - radius) / em.span) * em.span;
+        int z = (int)((em.posZ - radius) / em.span) * em.span;
+        renderGridLines(x, y, z, em.span, radius * 2 / em.span);
     }
 
     @Override
@@ -30,19 +35,18 @@ public class RenderGrid extends RenderPlayer {
     /**
      * グリッド線をレンダリングする
      */
-    protected void renderGridLines(double x, double y, double z) {
+    protected void renderGridLines(double x, double y, double z, int span, int times) {
 
         // 描画範囲を決定
-        double sx = 0;
-        double dx = 3;
-        double sy = 0;
-        double dy = 3;
-        double sz = 0;
-        double dz = 3;
+        double sx = x - renderManager.viewerPosX;
+        double dx = x + span*times - renderManager.viewerPosX;
+        double sy = y - renderManager.viewerPosY;
+        double dy = y + span*times - renderManager.viewerPosY;
+        double sz = z - renderManager.viewerPosZ;
+        double dz = z + span*times - renderManager.viewerPosZ;
 
         // 描画環境の設定
         GL11.glPushMatrix();
-        GL11.glTranslatef((float) x, (float) y, (float) z);
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glEnable(GL11.GL_BLEND);
