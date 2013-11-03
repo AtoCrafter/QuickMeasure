@@ -2,6 +2,9 @@ package ato.quickmeasure;
 
 import ato.quickmeasure.measure.Measure;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * プレイヤーが現在利用しているメジャーの管理をする
  */
@@ -10,44 +13,44 @@ public class MeasuresManager {
     /**
      * 現在アクティブのメジャー
      */
-    private Measure measure;
+    private List<Measure> measures = new ArrayList<Measure>();
 
     /**
-     * 現在プレイヤーが有効にしているメジャーを返す
-     *
-     * @return 非アクティブの場合は null
+     * アクティブなメジャーを追加
      */
-    public Measure getActiveMeasure() {
-        return measure;
-    }
-
-    /**
-     * アクティブなメジャーを指定する
-     *
-     * @param measure 非アクティブにする場合は null
-     */
-    public void setActiveMeasure(Measure measure) {
-        if (this.measure != measure) {
-            if (this.measure != null) {
-                this.measure.stop();
-            }
-            this.measure = measure;
-            if (this.measure != null) {
-                this.measure.start();
-            }
-        }
+    public void addMeasure(Measure measure) {
+        measures.add(measure);
     }
 
     /**
      * アクティブなメジャーの実行、待機を切り替える
      */
     public void toggleRunning() {
-        if (measure != null) {
-            if (measure.isRunning()) {
-                measure.stop();
+        for (Measure m : measures) {
+            if (m.isRunning()) {
+                m.stop();
             } else {
-                measure.start();
+                m.start();
             }
+        }
+    }
+
+    /**
+     * メジャーの結果の文字列を返す
+     */
+    public String getMeasureText() {
+        String separator = " / ";
+        String ret = "";
+        for (Measure m : measures) {
+            String text = m.getText();
+            if (text != null && text != "") {
+                ret += separator + m.getText();
+            }
+        }
+        if (ret.length() > 3) {
+            return ret.substring(3);
+        } else {
+            return null;
         }
     }
 }
