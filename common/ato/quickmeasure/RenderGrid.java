@@ -6,18 +6,17 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.opengl.GL11;
 
 public class RenderGrid extends RenderPlayer {
 
     @Override
     public void doRender(Entity e, double par2X, double par3Y, double par4Z, float f, float f1) {
-        EntityMeasure em = (EntityMeasure)e;
+        EntityMeasure em = (EntityMeasure) e;
         int radius = 2;
-        int x = (int)((em.posX - radius) / em.span) * em.span;
-        int y = (int)((em.posY - radius) / em.span) * em.span;
-        int z = (int)((em.posZ - radius) / em.span) * em.span;
+        int x = (int) ((em.posX - radius) / em.span) * em.span;
+        int y = (int) ((em.posY - radius) / em.span) * em.span;
+        int z = (int) ((em.posZ - radius) / em.span) * em.span;
         renderGridLines(x, y, z, em.span, radius * 2 / em.span);
     }
 
@@ -37,13 +36,10 @@ public class RenderGrid extends RenderPlayer {
      */
     protected void renderGridLines(double x, double y, double z, int span, int times) {
 
-        // 描画範囲を決定
+        // 描画座標をワールド座標系に変換
         double sx = x - renderManager.viewerPosX;
-        double dx = x + span*times - renderManager.viewerPosX;
         double sy = y - renderManager.viewerPosY;
-        double dy = y + span*times - renderManager.viewerPosY;
         double sz = z - renderManager.viewerPosZ;
-        double dz = z + span*times - renderManager.viewerPosZ;
 
         // 描画環境の設定
         GL11.glPushMatrix();
@@ -62,40 +58,31 @@ public class RenderGrid extends RenderPlayer {
         int b = 0;
         int a = 127;
 
-        // Down
-        ins.startDrawing(GL11.GL_LINE_LOOP);
+        ins.startDrawing(GL11.GL_LINES);
         ins.setColorRGBA(r, g, b, a);
-        ins.addVertex(sx, sy, sz);
-        ins.addVertex(dx, sy, sz);
-        ins.addVertex(dx, sy, dz);
-        ins.addVertex(sx, sy, dz);
-        ins.draw();
 
-        // Up
-        ins.startDrawing(GL11.GL_LINE_LOOP);
-        ins.setColorRGBA(r, g, b, a);
-        ins.addVertex(sx, dy, sz);
-        ins.addVertex(dx, dy, sz);
-        ins.addVertex(dx, dy, dz);
-        ins.addVertex(sx, dy, dz);
-        ins.draw();
+        // West-East
+        for (int i = 0; i <= times; ++i) {
+            for (int j = 0; j <= times; ++j) {
+                ins.addVertex(sx, sy + i * span, sz + j * span);
+                ins.addVertex(sx + times * span, sy + i * span, sz + j * span);
+            }
+        }
+        // North-South
+        for (int i = 0; i <= times; ++i) {
+            for (int j = 0; j <= times; ++j) {
+                ins.addVertex(sx + i * span, sy + j * span, sz);
+                ins.addVertex(sx + i * span, sy + j * span, sz + times * span);
+            }
+        }
+        // Up-Down
+        for (int i = 0; i <= times; ++i) {
+            for (int j = 0; j <= times; ++j) {
+                ins.addVertex(sx + i * span, sy, sz + j * span);
+                ins.addVertex(sx + i * span, sy + times * span, sz + j * span);
+            }
+        }
 
-        // West
-        ins.startDrawing(GL11.GL_LINE_LOOP);
-        ins.setColorRGBA(r, g, b, a);
-        ins.addVertex(sx, sy, sz);
-        ins.addVertex(sx, dy, sz);
-        ins.addVertex(sx, dy, dz);
-        ins.addVertex(sx, sy, dz);
-        ins.draw();
-
-        // East
-        ins.startDrawing(GL11.GL_LINE_LOOP);
-        ins.setColorRGBA(r, g, b, a);
-        ins.addVertex(dx, sy, sz);
-        ins.addVertex(dx, dy, sz);
-        ins.addVertex(dx, dy, dz);
-        ins.addVertex(dx, sy, dz);
         ins.draw();
 
         // 元の描画環境へ戻す
