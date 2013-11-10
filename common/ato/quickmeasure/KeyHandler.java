@@ -2,6 +2,7 @@ package ato.quickmeasure;
 
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.TickType;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import org.lwjgl.input.Keyboard;
 
@@ -19,7 +20,7 @@ public class KeyHandler extends KeyBindingRegistry.KeyHandler {
 
     @Override
     public void keyDown(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd, boolean isRepeat) {
-        if (kb == key && !tickEnd) {
+        if (kb == key && !tickEnd && Minecraft.getMinecraft().currentScreen == null) {
             manager.toggleRunning();
         }
     }
